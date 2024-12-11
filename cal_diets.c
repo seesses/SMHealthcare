@@ -26,7 +26,7 @@ static int diet_list_size = 0;
     description : read the information in "diets.txt"
 */
 
-void loadDiets(const char* DIETFILEPATH) {
+void loadDiets(const char* DIETFILEPATH) {  //const: 변수값 변경 불가 
     FILE *file = fopen(DIETFILEPATH, "r");
     if (file == NULL) {
         printf("There is no file for diets! \n");
@@ -34,8 +34,8 @@ void loadDiets(const char* DIETFILEPATH) {
     }
 
      // ToCode: to read a list of the diets from the given file
-    while () {
-    	
+    while (fscanf(file, "%s %d", diet_list[diet_list_size].food_name, &diet_list[diet_list_size].calories_intake)==2) {
+    	diet_list_size++;
         if (diet_list_size >= MAX_DIETS){
         	break;
 		}
@@ -57,16 +57,34 @@ void inputDiet(HealthData* health_data) {
     
     // ToCode: to provide the options for the diets to be selected
     printf("The list of diets:\n");
-    
-    
+    for (i = 0; i < diet_list_size; i++) {
+        printf("%d. %s - %d kcal\n", i + 1, diet_list[i].food_name, diet_list[i].calories_intake);
+    }
+    printf("7. Exit\n");
+
 	// ToCode: to enter the diet to be chosen with exit option
-    
+	printf("Select a diet: ");
+	scanf("%d", &choice);
+	
+	if(choice==7){
+		return;
+	}
 
     // ToCode: to enter the selected diet in the health data
-    
+    if(choice<1 || choice>7){
+    	printf("Please select between 1 and 7 numbers.");
+	}
+	else{
+		Diet selected_diet=diet_list[choice-1]; //selected_diet is temporarily save the user's selected diet_list
+        health_data->diet[health_data->diet_count]=selected_diet;
+        health_data->diet_count++;
+        health_data->total_calories_intake+=selected_diet.calories_intake;
+        
+        printf("You selected: %s (%d kcal)\n", selected_diet.food_name, selected_diet.calories_intake);
+	}
 
     // ToCode: to enter the total calories intake in the health data
-
+	
 
 }
 
