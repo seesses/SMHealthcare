@@ -34,7 +34,7 @@ void loadExercises(const char* EXERCISEFILEPATH) {
     }
 
     // ToCode: to read a list of the exercises from the given file
-    while (fscanf(file, "%s %d", exercise_list[exercise_list_size].exercise_name, exercise_list[exercise_list_size].calories_burned_per_minute)==2) {
+    while (fscanf(file, "%s %d", exercise_list[exercise_list_size].exercise_name, &exercise_list[exercise_list_size].calories_burned_per_minute)==2) {
     	exercise_list_size++;
         if (exercise_list_size >= MAX_EXERCISES){
         	break;
@@ -58,19 +58,59 @@ void loadExercises(const char* EXERCISEFILEPATH) {
 void inputExercise(HealthData* health_data) {
     int choice, duration, i;
     
+    if (exercise_list_size == 0) { //check if the exercise list is empty  
+        printf("No exercises loaded. Please check the exercises.txt file.\n");
+        return;
+    }
+    
+    
+    do{
+    	
     // ToCode: to provide the options for the exercises to be selected
     printf("The list of exercises: \n");
-
-
-    // ToCode: to enter the exercise to be chosen with exit option
-
+	for(i=0;i<exercise_list_size;i++){
+		printf("%d. %s - %d kcal\n", i+1, exercise_list[i].exercise_name, exercise_list[i].calories_burned_per_minute);	
+	}printf("7. Exit\n");
+	
+	// ToCode: to enter the exercise to be chosen with exit option
+	printf("Select exercise: ");
+	scanf("%d", &choice);
  
-    
-    // To enter the duration of the exercise
+ 
+	// ToCode: to enter the selected exercise and total calcories burned in the health data
+	
+	if(choice==7){
+		printf("OKAY. EXIT.\n");
+		break;
+	}
+	else if(choice<1||choice>7){
+		printf("Please select betwwen 1 and 7 numbers.\n");
+		continue;
+	}
+	
+	 // To enter the duration of the exercise
     printf("Enter the duration of the exercise (in min.): ");
     scanf("%d", &duration);
-
-    // ToCode: to enter the selected exercise and total calcories burned in the health data
+    
+    if (duration <= 0) {
+    printf("[Error] Duration must be a positive number.\n");
+    continue;
+	}
+	
+	Exercise selected_exercise=exercise_list[choice-1];
+    // Add the selected exercise to health_data 
+    int total_calories_burned;
+    total_calories_burned=selected_exercise.calories_burned_per_minute*duration;
+        
+    health_data->exercises[health_data->exercise_count]=selected_exercise;
+    health_data->exercise_count++;
+    //Update total calories burned in health_data
+    health_data->total_calories_burned += total_calories_burned;
+        
+    printf("Total calories burned: %d kcal\n", total_calories_burned);
+    printf("\n");
+    	
+	}while(1); //loop until the user selects 7
     
 
 }

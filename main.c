@@ -23,11 +23,11 @@ int main() {
 	// To initialize the health data object
     HealthData health_data = {0};
 
-	loadDiets(DIETFILEPATH);
-    
+	   
     // Tocode: to read the list of the exercises and diets
-    
-
+    loadDiets(DIETFILEPATH);
+	loadExercises(EXERCISEFILEPATH);
+	
     // ToCode: to run the "Healthcare Management Systems" until all calories are used up or the user wants to exit the system
     do {
     	if (health_data.total_calories_intake - BASAL_METABOLIC_RATE - health_data.total_calories_burned == 0){
@@ -49,7 +49,7 @@ int main() {
 		// ToCode: to run the sysmtem based on the user's choice
         switch (choice) {
             case 1:
-            	
+            	inputExercise(&health_data);
                 break;
                 
             case 2:
