@@ -35,6 +35,7 @@ typedef struct {
 typedef struct {
 Exercise exercises[MAX_EXERCISES];  // exercise history
     Diet diet[MAX_DIETS];                // diet history
+    int exercise_durations[MAX_EXERCISES]; 
     int exercise_count;                  // number of exercises
     int diet_count;                      // number of diets
     int total_calories_burned;           // total calories burned

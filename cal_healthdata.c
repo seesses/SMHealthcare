@@ -26,6 +26,9 @@
 
 void saveData(const char* HEALTHFILEPATH, const HealthData* health_data) {
 	int i;
+	int total_calories_burned;
+	int exercise_durations[MAX_EXERCISES];
+
     FILE* file = fopen(HEALTHFILEPATH, "w");
     if (file == NULL) {
         printf("There is no file for health data.\n");
@@ -35,7 +38,9 @@ void saveData(const char* HEALTHFILEPATH, const HealthData* health_data) {
     // ToCode: to save the chosen exercise and total calories burned 
     fprintf(file, "\n[Exercises]\n");
     for(i=0;i<health_data->exercise_count;i++){
-    	fprintf(file,"%s - %d kcal\n", health_data->exercises[i].exercise_name, health_data->exercises[i].calories_burned_per_minute);
+    	int duration=exercise_durations[i];
+    	int calories_burned=health_data->exercises[i].calories_burned_per_minute * duration;;
+    	fprintf(file,"%s - %d kcal\n", health_data->exercises[i].exercise_name, calories_burned);
 	}
 	fprintf(file, "Total calories burned: %d kcal", health_data->total_calories_burned);
     
@@ -69,12 +74,15 @@ void saveData(const char* HEALTHFILEPATH, const HealthData* health_data) {
 
 void printHealthData(const HealthData* health_data) {
 	int i;
-	
+	int total_calories_burned;
+	int exercise_durations[MAX_EXERCISES];
 
 	// ToCode: to print out the saved history of exercises
 	printf("=========================== History of Exercise =======================\n");
     for(i=0;i<health_data->exercise_count;i++){
-    	printf("Exercise: %s, Calories burned : %d kcal\n", health_data->exercises[i].exercise_name, health_data->exercises[i].calories_burned_per_minute);
+    	int duration = exercise_durations[i];
+        int calories_burned = health_data->exercises[i].calories_burned_per_minute * duration;
+    	printf("Exercise: %s, Calories burned : %d kcal\n", health_data->exercises[i].exercise_name, calories_burned);
 	}
   
     printf("=======================================================================\n");
@@ -82,7 +90,9 @@ void printHealthData(const HealthData* health_data) {
     // ToCode: to print out the saved history of diets
     printf("============================= History of Diet =========================\n");
 	for(i=0;i<health_data->diet_count;i++){
-		printf("Food: %s, Calories intake: %d kcal\n", health_data->diet[i].food_name, health_data->diet[i].calories_intake);
+		int duration;
+		int calories_burned=health_data->exercises[i].calories_burned_per_minute * duration;
+		printf("Food: %s, Calories intake: %d kcal\n", health_data->diet[i].food_name, calories_burned);
 	}
 
     printf("=======================================================================\n");
