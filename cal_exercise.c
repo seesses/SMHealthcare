@@ -98,31 +98,18 @@ void inputExercise(HealthData* health_data) {
 		}
 	
 		
-    /*	// Add the selected exercise to health_data 
-    	Exercise selected_exercise=exercise_list[choice-1];
-    	
-    	int total_calories_burned;
-		total_calories_burned=selected_exercise.calories_burned_per_minute*duration;
+    	// Add the selected exercise to health_data 
+		health_data->exercises[health_data->exercise_count] = exercise_list[choice - 1];
+        health_data->exercise_durations[health_data->exercise_count] = duration;
     	
     	//Update total calories burned in health_data
-    	health_data->exercises[health_data->exercise_count] = selected_exercise;
-    	health_data->total_calories_burned += total_calories_burned;
+    	
+        int calories_burned = exercise_list[choice - 1].calories_burned_per_minute * duration;
+        health_data->total_calories_burned += calories_burned;
+
         health_data->exercise_count++;
-        
-    	printf("Total calories burned: %d kcal\n", total_calories_burned);
-    	printf("\n");*/
+        printf("Total calories burned: %d kcal\n", calories_burned);
     	
-    	Exercise selected_exercise=exercise_list[choice-1]; // When show logged information is selected, the consumed calorie values for each exercise are not output properly(2024.12.14)
-    	int calories_burned;
-    	
-    	calories_burned=selected_exercise.calories_burned_per_minute*duration;
-    	health_data->exercises[health_data->exercise_count]=selected_exercise;
-    	health_data->exercise_count++;
-    	
-    	health_data->total_calories_burned+=calories_burned;
-    	
-    	printf("Total calories burned: %d kcal\n", health_data->total_calories_burned);
-		
 	}while(1); //loop until the user selects 7		
 		
 }
