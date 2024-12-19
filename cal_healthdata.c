@@ -29,13 +29,13 @@ void saveData(const char* HEALTHFILEPATH, const HealthData* health_data) {
 
     FILE* file = fopen(HEALTHFILEPATH, "w");
     if (file == NULL) {
-        printf("There is no file for health data.\n");
+        printf("There is no file for health data.\n"); // for debugging: If file doesn't exist, show error and return
         return;
     }
 
     // ToCode: to save the chosen exercise and total calories burned 
     fprintf(file, "\n[Exercises]\n");
-    int total_calories_burned=0;
+    int total_calories_burned=0; //initialization
     for(i=0;i<health_data->exercise_count;i++){
     	int duration=health_data->exercise_durations[i];
     	int calories_burned=health_data->exercises[i].calories_burned_per_minute * duration;
@@ -79,7 +79,7 @@ void printHealthData(const HealthData* health_data) {
 
 	// ToCode: to print out the saved history of exercises
 	printf("=========================== History of Exercise =======================\n");
-	int total_calories_burned=0;
+	int total_calories_burned=0; //initialization
     for(i=0;i<health_data->exercise_count;i++){
     	int duration = health_data->exercise_durations[i];
         int calories_burned = health_data->exercises[i].calories_burned_per_minute * duration;
@@ -123,7 +123,7 @@ void printHealthData(const HealthData* health_data) {
 			printf("You have eaten more calories than planned today, but you have exercised too much!\n");
 		}
 	}else if(remaining_calories>0){
-		printf("Please exercise for your haelth\n");
+		printf("Please exercise for your health\n");
 		if(health_data->total_calories_intake==BASAL_METABOLIC_RATE){
 			printf("Your total calorie intake for today has reached your goal!\n");
 		}else if(health_data->total_calories_intake<BASAL_METABOLIC_RATE){

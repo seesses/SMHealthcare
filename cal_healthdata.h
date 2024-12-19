@@ -35,7 +35,7 @@ typedef struct {
 typedef struct {
 Exercise exercises[MAX_EXERCISES];  // exercise history
     Diet diet[MAX_DIETS];                // diet history
-    int exercise_durations[MAX_EXERCISES]; 
+    int exercise_durations[MAX_EXERCISES]; //added: 3. In the process of outputting calories burned for each exercise in show logged information, the 'total_calories_burned' variable alone cannot solve it, so a new variable is added
     int exercise_count;                  // number of exercises
     int diet_count;                      // number of diets
     int total_calories_burned;           // total calories burned

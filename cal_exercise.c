@@ -19,7 +19,7 @@
 
 // To declare the structure of the exercises
 static Exercise exercise_list[MAX_EXERCISES];
-int exercise_list_size = 0;
+int exercise_list_size = 0; // Tracks the current number of exercises loaded
 
 
 /*
@@ -35,13 +35,13 @@ void loadExercises(const char* EXERCISEFILEPATH) {
 
     // ToCode: to read a list of the exercises from the given file
     while (fscanf(file, "%s %d", exercise_list[exercise_list_size].exercise_name, &exercise_list[exercise_list_size].calories_burned_per_minute)==2) {
-    	exercise_list_size++;
+    	exercise_list_size++; //increase the count of exercise lodded
         if (exercise_list_size >= MAX_EXERCISES){
         	break;
 		}
     }
 
-    fclose(file);
+    fclose(file); // Close the file
 }
 
 
@@ -58,7 +58,7 @@ void loadExercises(const char* EXERCISEFILEPATH) {
 void inputExercise(HealthData* health_data) {
     int choice, duration, i;
     
-    if (exercise_list_size == 0) { //check if the exercise list is empty  
+    if (exercise_list_size == 0) { //for debugging: check if the exercise list is empty  
         printf("No exercises loaded. Please check the exercises.txt file.\n");
         return;
     }
@@ -104,8 +104,8 @@ void inputExercise(HealthData* health_data) {
     	
     	//Update total calories burned in health_data
     	
-        int calories_burned = exercise_list[choice - 1].calories_burned_per_minute * duration;
-        health_data->total_calories_burned += calories_burned;
+        int calories_burned = exercise_list[choice - 1].calories_burned_per_minute * duration;  // calculate the calories burned for the selected exercise
+        health_data->total_calories_burned += calories_burned; // increase the cumulative total calories burned stored in 'health_data' by the calculated 'calories_burned'
 
         health_data->exercise_count++;
         printf("Total calories burned: %d kcal\n", calories_burned);
