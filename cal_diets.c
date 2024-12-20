@@ -34,7 +34,7 @@ void loadDiets(const char* DIETFILEPATH) {  //const: 변수값 변경 불가
     }
 
     // ToCode: to read a list of the diets from the given file
-    while (fscanf(file, "%s %d", diet_list[diet_list_size].food_name, &diet_list[diet_list_size].calories_intake)==2) {
+    while (fscanf(file, "%s %d", diet_list[diet_list_size].food_name, &diet_list[diet_list_size].calories_intake)==2) { //// fscanf returns the number of successfully matched and assigned inputs
     	diet_list_size++; // increase the count of diets lodded
         if (diet_list_size >= MAX_DIETS){
         	break;
@@ -66,7 +66,7 @@ void inputDiet(HealthData* health_data) {
 		// ToCode: to enter the diet to be chosen with exit option
 		printf("Select a diet: ");
 		scanf("%d", &choice);
-		printf("\n"); //a line change to stand out
+		printf("\n \n"); //a line change to stand out
 	
 		if(choice==7){
 			break;
@@ -86,7 +86,7 @@ void inputDiet(HealthData* health_data) {
         	// ToCode: to enter the total calories intake in the health data
         	health_data->total_calories_intake+=selected_diet.calories_intake;
         	
-        	printf("You selected: %s (%d kcal)\n", selected_diet.food_name, selected_diet.calories_intake);
+        	printf("You selected: %s (%d kcal)\n \n", selected_diet.food_name, selected_diet.calories_intake);
 		}
     	
 	}while(1); //loop until the user selects 7

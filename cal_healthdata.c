@@ -39,8 +39,8 @@ void saveData(const char* HEALTHFILEPATH, const HealthData* health_data) {
     for(i=0;i<health_data->exercise_count;i++){
     	int duration=health_data->exercise_durations[i];
     	int calories_burned=health_data->exercises[i].calories_burned_per_minute * duration;
-    	fprintf(file,"%s - %d kcal\n", health_data->exercises[i].exercise_name, calories_burned);
-    	total_calories_burned+=calories_burned;
+    	fprintf(file,"%s - %d kcal\n", health_data->exercises[i].exercise_name, calories_burned); // fprint the exercise name and the calories_burned for each exercise to the file
+    	total_calories_burned+=calories_burned; //total_calories_burned is the sum of calories burned for each exercise.
 	}
 	fprintf(file, "Total calories burned: %d kcal", health_data->total_calories_burned);
 

@@ -34,7 +34,7 @@ void loadExercises(const char* EXERCISEFILEPATH) {
     }
 
     // ToCode: to read a list of the exercises from the given file
-    while (fscanf(file, "%s %d", exercise_list[exercise_list_size].exercise_name, &exercise_list[exercise_list_size].calories_burned_per_minute)==2) {
+    while (fscanf(file, "%s %d", exercise_list[exercise_list_size].exercise_name, &exercise_list[exercise_list_size].calories_burned_per_minute)==2) { //if it returns 2, it means both the exercise name and calories_burned were read correctly
     	exercise_list_size++; //increase the count of exercise lodded
         if (exercise_list_size >= MAX_EXERCISES){
         	break;
@@ -84,7 +84,7 @@ void inputExercise(HealthData* health_data) {
 			break;
 		}
 		else if(choice<1||choice>7){
-			printf("Please select betwwen 1 and 7 numbers.\n");
+			printf("Please select betwwen 1 and 7 numbers.\n \n");
 			continue;
 		}
 					
@@ -93,7 +93,7 @@ void inputExercise(HealthData* health_data) {
     	scanf("%d", &duration);
     
     	if (duration <= 0) {
-    		printf("[Error] Duration must be a positive number.\n");
+    		printf("[Error] Duration must be a positive number.\n \n");
     		continue;
 		}
 	
@@ -108,7 +108,7 @@ void inputExercise(HealthData* health_data) {
         health_data->total_calories_burned += calories_burned; // increase the cumulative total calories burned stored in 'health_data' by the calculated 'calories_burned'
 
         health_data->exercise_count++;
-        printf("Total calories burned: %d kcal\n", calories_burned);
+        printf("Total calories burned: %d kcal\n \n", calories_burned);
     	
 	}while(1); //loop until the user selects 7		
 		
